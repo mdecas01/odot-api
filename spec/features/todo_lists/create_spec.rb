@@ -51,4 +51,24 @@ describe "Creating todo lists" do
       visit "/todo_lists"
       expect(page).to_not have_content("some description")
     end	
+
+    it "displays error if no description has less than 5 characteres" do
+      expect(TodoList.count).to eq(0)
+
+      visit "/todo_lists"
+      click_link "New Todo list"
+      expect(page).to have_content("New todo_list")
+
+      fill_in "Title", with: "todo list"
+      fill_in "Description", with: "some"
+
+      click_button "Create Todo list"
+
+      expect(page).to have_content("error")
+      expect(TodoList.count).to eq(0)
+
+      visit "/todo_lists"
+      expect(page).to_not have_content("some description")
+    end	
+
 end

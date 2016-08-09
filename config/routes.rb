@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
 
+get "signup" => "users#new"
+resource :session
+resources :users
+
+namespace :api do
+  resources :todo_lists do
+    resources :todo_items, only: [:create, :update, :destroy]
+  end
+end
   resources :todo_lists do
     resources :todo_items
   end  

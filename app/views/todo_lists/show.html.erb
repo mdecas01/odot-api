@@ -10,5 +10,11 @@
   <%= @todo_list.description %>
 </p>
 
+<p>
+  <% @todo_list.todo_items.each do |item| %>
+    <%= item.content %>
+  <% end %>
+</p>
+
 <%= link_to 'Edit', edit_todo_list_path(@todo_list) %> |
 <%= link_to 'Back', todo_lists_path %>
